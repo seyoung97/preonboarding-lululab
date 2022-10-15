@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     margin:0 auto;
-    max-width:768px;
+    
     font-family: 'Noto Sans KR', sans-serif;
   }
 `;

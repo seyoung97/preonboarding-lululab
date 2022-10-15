@@ -1,9 +1,12 @@
 import styled from 'styled-components';
+import MonthList from '../components/ReservationList/MonthList';
 
-const testBlock = styled.div``;
-
-const test = () => {
-  return <testBlock></testBlock>;
+const ReservationList = () => {
+  return (
+    <section>
+      <MonthList />
+    </section>
+  );
 };
 
-export default test;
+export default ReservationList;
