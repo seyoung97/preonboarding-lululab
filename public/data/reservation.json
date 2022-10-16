@@ -1,0 +1,102 @@
+{
+  "reservationListData": [
+    {
+      "sixteenth": [
+        {
+          "id": 0,
+          "time": "10:00",
+          "isReservated": true
+        },
+        {
+          "id": 1,
+          "time": "11:00",
+          "isReservated": false
+        },
+        {
+          "id": 2,
+          "time": "12:00",
+          "isReservated": false
+        },
+        {
+          "id": 3,
+          "time": "13:00",
+          "isReservated": true
+        },
+        {
+          "id": 4,
+          "time": "14:00",
+          "isReservated": true
+        },
+        {
+          "id": 5,
+          "time": "15:00",
+          "isReservated": false
+        },
+        {
+          "id": 6,
+          "time": "16:00",
+          "isReservated": true
+        },
+        {
+          "id": 7,
+          "time": "17:00",
+          "isReservated": true
+        },
+        {
+          "id": 8,
+          "time": "18:00",
+          "isReservated": true
+        }
+      ]
+    },
+    {
+      "seventeenth": [
+        {
+          "id": 0,
+          "time": "10:00",
+          "isReservated": true
+        },
+        {
+          "id": 1,
+          "time": "11:00",
+          "isReservated": false
+        },
+        {
+          "id": 2,
+          "time": "12:00",
+          "isReservated": false
+        },
+        {
+          "id": 3,
+          "time": "13:00",
+          "isReservated": true
+        },
+        {
+          "id": 4,
+          "time": "14:00",
+          "isReservated": true
+        },
+        {
+          "id": 5,
+          "time": "15:00",
+          "isReservated": false
+        },
+        {
+          "id": 6,
+          "time": "16:00",
+          "isReservated": true
+        },
+        {
+          "id": 7,
+          "time": "17:00",
+          "isReservated": true
+        },
+        {
+          "id": 8,
+          "time": "18:00",
+          "isReservated": true
+        }
+      ]
+    }
+  ]
+}

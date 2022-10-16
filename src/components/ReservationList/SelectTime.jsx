@@ -1,8 +1,14 @@
 import styled from 'styled-components';
 import { mainColor } from '../../theme';
 
-const SelectTime = () => {
-  return <Button>10:00</Button>;
+const SelectTime = ({ reservationListData }) => {
+  const activeBtn = () => {
+    if (reservationListData.isReservated === true) {
+      return true;
+    }
+  };
+
+  return <Button disabled={!activeBtn()}>{reservationListData.time}</Button>;
 };
 
 const Button = styled.button`
@@ -15,6 +21,12 @@ const Button = styled.button`
   :focus {
     background-color: ${mainColor};
     color: white;
+    cursor: pointer;
+  }
+  &:disabled {
+    background-color: #ddd;
+    color: black;
+    cursor: not-allowed;
   }
 `;
 
