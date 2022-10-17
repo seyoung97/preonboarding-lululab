@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import styled from 'styled-components';
 import { mainColor } from '../../theme';
 
@@ -30,4 +31,4 @@ const Button = styled.button`
   }
 `;
 
-export default SelectTime;
+export default memo(SelectTime);

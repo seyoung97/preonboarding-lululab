@@ -11,7 +11,7 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<ReservationList />} />
-        <Route path='/reservationform' element={<ReservationForm />} />
+        <Route path='/reservationform/:id' element={<ReservationForm />} />
       </Routes>
     </>
   );

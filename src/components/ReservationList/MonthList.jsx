@@ -1,27 +1,27 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState, memo } from 'react';
+
 import styled from 'styled-components';
 import { mainColor } from '../../theme';
+import { useNavigate } from 'react-router-dom';
 
 import Calendar from 'react-calendar';
 import SelectTime from './SelectTime';
 
 import 'react-calendar/dist/Calendar.css';
 
-const MonthList = () => {
-  const [value, onChange] = useState(new Date());
-  const [reservationList, setReservationList] = useState([]);
-  const [reservationTime, setReservationTime] = useState([]);
-  // console.log(value);
+const MonthList = ({ value, onChange, reservationTime }) => {
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    (async () => {
-      const { data } = await axios.get('/data/reservation.json');
-      setReservationList(data.reservationListData.slice(0, 1));
-      setReservationTime(reservationList[0].sixteenth);
-    })();
-  }, []);
-  console.log(reservationTime);
+  // const handleTimeClick = e => {
+  //   let selectedTime = reservationListData[e.target.id].time;
+  //   return selectedTime;
+  // };
+
+  // const handleReservationClick = () => {
+  //   if (selectedTime) {
+  //     navigate(`/reservationform/${selectedTime}`);
+  //   }
+  // };
 
   return (
     <Section>
@@ -38,13 +38,13 @@ const MonthList = () => {
               );
             })}
         </ul>
+        <button className='make-reservation'>예약하기</button>
       </div>
     </Section>
   );
 };
 
 const Section = styled.section`
-  border: 1px solid gray;
   display: flex;
   justify-content: center;
   margin-top: 100px;
@@ -94,7 +94,6 @@ const Section = styled.section`
     background-color: ${mainColor};
   }
   .time-container {
-    border: 1px solid gray;
     margin: 15px 0px 0px 30px;
 
     .able-time {
@@ -105,6 +104,7 @@ const Section = styled.section`
     ul {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       margin-top: 20px;
       width: 240px;
       li {
@@ -112,7 +112,16 @@ const Section = styled.section`
         margin-bottom: 15px;
       }
     }
+    .make-reservation {
+      margin: 25px 0px 0px 3px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: ${mainColor};
+      color: white;
+      font-size: 16px;
+    }
   }
 `;
 
-export default MonthList;
+export default memo(MonthList);
