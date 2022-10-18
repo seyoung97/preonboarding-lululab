@@ -4,22 +4,27 @@ import { mainColor, layout } from '../theme';
 
 const ReservationInquiry = ({ reservatedList, setReservatedList }) => {
   const [inquiry, setInquiry] = useState('');
+  const [isReservated, setIsReservated] = useState(null);
   console.log(reservatedList);
 
-  let index = 0;
+  // const handleInquiry = () => {
+  //   for (let i = 0; i < reservatedList.length; i++) {
+  //     if (reservatedList[i]['user_contact'] === inquiry) {
+  //       setIsReservated(reservatedList[i]);
+  //     } else if (reservatedList[i]['user_contact'] !== inquiry) {
+  //       setIsReservated(null);
+  //     }
+  //     return isReservated;
+  //   }
+  // };
+
   const handleInquiry = () => {
-    for (let i = 0; i < reservatedList.length; i++) {
-      if (reservatedList[i]['user_contact'] === inquiry) {
-        index = i;
-        alert(index);
-      } else {
-        index = '예약 내역이 존재하지 않습니다';
-        alert(index);
-      }
-    }
+    const result = reservatedList.filter(data => data['user_contact'] === inquiry);
+    setIsReservated(result);
   };
 
   console.log(typeof inquiry, inquiry);
+  console.log(isReservated);
 
   return (
     <Section>
@@ -35,6 +40,7 @@ const ReservationInquiry = ({ reservatedList, setReservatedList }) => {
         ></input>
       </div>
       <button onClick={handleInquiry}>조회하기</button>
+      {isReservated === null ? <div>null</div> : <div>{isReservated[0]['user_name']}</div>}
     </Section>
   );
 };
