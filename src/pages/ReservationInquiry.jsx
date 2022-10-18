@@ -1,15 +1,40 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { mainColor, layout } from '../theme';
 
 const ReservationInquiry = ({ reservatedList, setReservatedList }) => {
+  const [inquiry, setInquiry] = useState('');
   console.log(reservatedList);
+
+  let index = 0;
+  const handleInquiry = () => {
+    for (let i = 0; i < reservatedList.length; i++) {
+      if (reservatedList[i]['user_contact'] === inquiry) {
+        index = i;
+        alert(index);
+      } else {
+        index = '예약 내역이 존재하지 않습니다';
+        alert(index);
+      }
+    }
+  };
+
+  console.log(typeof inquiry, inquiry);
+
   return (
     <Section>
       <h1>예약 조회</h1>
       <h2>예약시 등록한 연락처를 입력해주세요.</h2>
       <div>
-        연락처 <input></input>
+        연락처
+        <input
+          type='string'
+          onChange={e => {
+            setInquiry(e.target.value);
+          }}
+        ></input>
       </div>
+      <button onClick={handleInquiry}>조회하기</button>
     </Section>
   );
 };
@@ -36,14 +61,24 @@ const Section = styled.section`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 20px 30px;
+    margin: 30px 10px;
     font-size: 20px;
     input {
-      width: 300px;
+      width: 320px;
       height: 40px;
       border: 1px solid darkgray;
       border-radius: 3px;
     }
+  }
+  button {
+    width: 100%;
+    padding: 10px 0px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: ${mainColor};
+    color: white;
+    font-size: 20px;
   }
 `;
 

@@ -19,7 +19,7 @@ const ReservationForm = ({ reservatedList, setReservatedList }) => {
       id: id,
       user_name: name,
       user_birth: birth,
-      user_cotact: contact,
+      user_contact: contact,
       reason: reason,
       date: reservatedTime,
       is_noshow: false,
