@@ -11,17 +11,18 @@ import 'react-calendar/dist/Calendar.css';
 
 const MonthList = ({ value, onChange, reservationTime }) => {
   const navigate = useNavigate();
+  const [selectedTime, setSelectedTime] = useState('');
 
-  // const handleTimeClick = e => {
-  //   let selectedTime = reservationListData[e.target.id].time;
-  //   return selectedTime;
-  // };
+  const handleTimeClick = e => {
+    setSelectedTime(reservationTime[e.target.id].time);
+  };
+  console.log(selectedTime);
 
-  // const handleReservationClick = () => {
-  //   if (selectedTime) {
-  //     navigate(`/reservationform/${selectedTime}`);
-  //   }
-  // };
+  const handleReservationClick = () => {
+    if (selectedTime) {
+      navigate(`/reservationform/selectedtime?${selectedTime}`);
+    }
+  };
 
   return (
     <Section>
@@ -33,12 +34,14 @@ const MonthList = ({ value, onChange, reservationTime }) => {
             reservationTime.map(data => {
               return (
                 <li key={data.id}>
-                  <SelectTime reservationListData={data} />
+                  <SelectTime reservationListData={data} id={data.id} handleTimeClick={handleTimeClick} />
                 </li>
               );
             })}
         </ul>
-        <button className='make-reservation'>예약하기</button>
+        <button className='make-reservation' onClick={handleReservationClick}>
+          예약하기
+        </button>
       </div>
     </Section>
   );

@@ -2,14 +2,24 @@ import { memo } from 'react';
 import styled from 'styled-components';
 import { mainColor } from '../../theme';
 
-const SelectTime = ({ reservationListData }) => {
+const SelectTime = ({ reservationListData, id, handleTimeClick }) => {
   const activeBtn = () => {
     if (reservationListData.isReservated === true) {
       return true;
     }
   };
 
-  return <Button disabled={!activeBtn()}>{reservationListData.time}</Button>;
+  return (
+    <Button
+      disabled={!activeBtn()}
+      id={id}
+      onClick={e => {
+        handleTimeClick(e);
+      }}
+    >
+      {reservationListData.time}
+    </Button>
+  );
 };
 
 const Button = styled.button`

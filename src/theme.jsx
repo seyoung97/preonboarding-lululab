@@ -1,3 +1,5 @@
 const mainColor = '#20203e';
 
-export { mainColor };
+const layout = `1px solid gray`;
+
+export { mainColor, layout };
