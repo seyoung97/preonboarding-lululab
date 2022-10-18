@@ -31,6 +31,7 @@ const ReservationList = () => {
         value={value}
         onChange={onChange}
         reservationTime={reservationTime}
+        limit={limit}
       />
     </section>
   );

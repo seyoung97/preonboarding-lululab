@@ -4,6 +4,7 @@ import { mainColor, layout } from '../theme';
 
 const ReservationForm = () => {
   const location = useLocation();
+  const reservatedTime = location.search.slice(1, 13);
 
   return (
     <Section>
@@ -26,7 +27,7 @@ const ReservationForm = () => {
       </div>
 
       <div className='date'>
-        예약일시<span>10월 17일 {location.search}시</span>
+        예약일시<span>{reservatedTime}</span>
       </div>
       <button>예약하기</button>
     </Section>
