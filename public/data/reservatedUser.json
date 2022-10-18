@@ -1,0 +1,20 @@
+{
+  "reservatedUserList": [
+    {
+      "id": 0,
+      "user_name": "정세영",
+      "user_cotact": "01012341234",
+      "reason": "상담",
+      "date": "10월19일13:00시",
+      "is_noshow": false
+    },
+    {
+      "id": 1,
+      "user_name": "박비비",
+      "user_cotact": "01043214321",
+      "reason": "시술",
+      "date": "10월19일14:00시",
+      "is_noshow": true
+    }
+  ]
+}

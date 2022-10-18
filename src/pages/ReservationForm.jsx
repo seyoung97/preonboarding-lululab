@@ -1,34 +1,96 @@
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useParams, useLocation } from 'react-router-dom';
 import { mainColor, layout } from '../theme';
 
-const ReservationForm = () => {
+const ReservationForm = ({ reservatedList, setReservatedList }) => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const reservatedTime = location.search.slice(1, 13);
+  const [id, setId] = useState(0);
+  const [name, setName] = useState('');
+  const [birth, setBirth] = useState('');
+  const [contact, setContact] = useState('');
+  const [reason, setReason] = useState('');
+
+  const addList = () => {
+    setId(id + 1);
+    const newList = {
+      id: id,
+      user_name: name,
+      user_birth: birth,
+      user_cotact: contact,
+      reason: reason,
+      date: reservatedTime,
+      is_noshow: false,
+    };
+    setReservatedList([...reservatedList, newList]);
+  };
+  console.log(reservatedList);
+
+  const goToInquiry = () => {
+    alert('예약이 완료되었습니다.');
+    navigate('/reservationInquiry');
+  };
 
   return (
     <Section>
       <h1>예약자 정보</h1>
       <div>
-        성함<input type='string' className='name'></input>
+        성함
+        <input
+          type='string'
+          className='name'
+          onChange={e => {
+            setName(e.target.value);
+          }}
+        ></input>
       </div>
       <div>
-        생년월일<input type='string' className='birthday'></input>{' '}
+        생년월일
+        <input
+          type='string'
+          className='birthday'
+          placeholder='6자리로 작성해주세요 ex)970425'
+          onChange={e => {
+            setBirth(e.target.value);
+          }}
+        ></input>
       </div>
       <div>
-        연락처<input type='string' className='cellphone'></input>
+        연락처
+        <input
+          type='number'
+          className='cellphone'
+          onChange={e => {
+            setContact(e.target.value);
+          }}
+        ></input>
       </div>
       <div>
         예약 내용
-        <select className='reason'>
-          <option value='0'>상담</option>
-          <option value='1'>시술</option>
+        <select
+          className='reason'
+          onChange={e => {
+            setReason(e.target.value);
+          }}
+        >
+          <option value='상담'>상담</option>
+          <option value='시술'>시술</option>
         </select>
       </div>
 
       <div className='date'>
-        예약일시<span>10월 17일 {location.search}시</span>
+        예약일시<span>{reservatedTime}</span>
       </div>
-      <button>예약하기</button>
+      <button
+        onClick={() => {
+          addList();
+          goToInquiry();
+        }}
+      >
+        예약하기
+      </button>
     </Section>
   );
 };

@@ -9,18 +9,20 @@ import SelectTime from './SelectTime';
 
 import 'react-calendar/dist/Calendar.css';
 
-const MonthList = ({ value, onChange, reservationTime }) => {
+const MonthList = ({ value, onChange, reservationTime, limit }) => {
   const navigate = useNavigate();
+  const [selectedMonth, setSelectedMonth] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
 
   const handleTimeClick = e => {
+    setSelectedMonth((value.getMonth() + 1).toString());
     setSelectedTime(reservationTime[e.target.id].time);
   };
   console.log(selectedTime);
 
   const handleReservationClick = () => {
     if (selectedTime) {
-      navigate(`/reservationform/selectedtime?${selectedTime}`);
+      navigate(`/reservationform/selectedtime?${selectedMonth}월${limit}일${selectedTime}시`);
     }
   };
 
