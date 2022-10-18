@@ -1,17 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
-import GlobalStyle from './GrobalStyle';
-import Play from './page/Play';
-import PlayList from './page/PlayList';
-import Record from './page/Record';
+import GlobalStyle from './GlobalStyle';
+import Header from './components/Header/Header';
+import ReservationList from './pages/ReservaionList';
+import ReservationForm from './pages/ReservationForm';
 
 function App() {
   return (
     <>
       <GlobalStyle />
+      <Header />
       <Routes>
-        <Route path='/' element={<Play />} />
-        <Route path='/record' element={<Record />} />
-        <Route path='/playlist' element={<PlayList />} />
+        <Route path='/' element={<ReservationList />} />
+        <Route path='/reservationform/:id' element={<ReservationForm />} />
       </Routes>
     </>
   );
