@@ -1,36 +1,17 @@
-import styled from 'styled-components';
 import { useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import { mainColor, layout } from '../theme';
 
-const ReservationForm = () => {
+const ReservationForm = ({ reservatedList, setReservatedList }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const reservatedTime = location.search.slice(1, 13);
-  const [id, setId] = useState(1);
+  const [id, setId] = useState(0);
   const [name, setName] = useState('');
   const [birth, setBirth] = useState('');
   const [contact, setContact] = useState('');
   const [reason, setReason] = useState('');
-  const [reservatedList, setReservatedList] = useState([
-    {
-      id: 0,
-      user_name: '정세영',
-      user_birth: '000323',
-      user_cotact: '01012341234',
-      reason: '상담',
-      date: '10월19일13:00시',
-      is_noshow: false,
-    },
-    {
-      id: 1,
-      user_name: '박비비',
-      user_birth: '201014',
-      user_cotact: '01043214321',
-      reason: '시술',
-      date: '10월19일14:00시',
-      is_noshow: true,
-    },
-  ]);
 
   const addList = () => {
     setId(id + 1);
@@ -46,6 +27,11 @@ const ReservationForm = () => {
     setReservatedList([...reservatedList, newList]);
   };
   console.log(reservatedList);
+
+  const goToInquiry = () => {
+    alert('예약이 완료되었습니다.');
+    navigate('/reservationInquiry');
+  };
 
   return (
     <Section>
@@ -97,7 +83,14 @@ const ReservationForm = () => {
       <div className='date'>
         예약일시<span>{reservatedTime}</span>
       </div>
-      <button onClick={addList}>예약하기</button>
+      <button
+        onClick={() => {
+          addList();
+          goToInquiry();
+        }}
+      >
+        예약하기
+      </button>
     </Section>
   );
 };
