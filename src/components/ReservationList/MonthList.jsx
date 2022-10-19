@@ -1,4 +1,4 @@
-import { useEffect, useState, memo } from 'react';
+import { useState, memo } from 'react';
 
 import styled from 'styled-components';
 import { mainColor } from '../../theme';
@@ -28,7 +28,7 @@ const MonthList = ({ value, onChange, reservationTime, limit }) => {
 
   return (
     <Section>
-      <Calendar onChange={onChange} value={value} />
+      <Calendar onChange={onChange} value={value} minDate={new Date()} />
       <div className='time-container'>
         <div className='able-time'>예약 시간 선택</div>
         <ul>
