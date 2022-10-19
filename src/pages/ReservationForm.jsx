@@ -1,7 +1,10 @@
 import { useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import BlackList from '../assets/data/blackList.json';
 import styled from 'styled-components';
+
+import BlackList from '../assets/data/blackList.json';
+import Modal from '../components/Modal/Modal';
+import Error from '../components/Modal/Erro';
 import { mainColor, layout } from '../theme';
 
 const ReservationForm = ({ reservatedList, setReservatedList }) => {
@@ -13,16 +16,22 @@ const ReservationForm = ({ reservatedList, setReservatedList }) => {
   const [birth, setBirth] = useState('');
   const [contact, setContact] = useState('');
   const [reason, setReason] = useState('');
+  const [openModal, setOpenModal] = useState(false);
+  const [openError, setOpenError] = useState(false);
+  const [error, setError] = useState('');
+
   const blackList = useMemo(() => BlackList, []);
   console.log(blackList);
 
-  const goToInquiry = () => {
+  const AddList = () => {
     for (let i = 0; i < blackList.length; i++) {
       if (blackList[i]['user_contact'] === contact && blackList[i]['user_name'] === name) {
-        alert('귀하는 온라인으로 예약하실 수 없습니다. 병원에 문의해주세요.');
+        setOpenError(true);
+        setError('귀하는 온라인으로 예약하실 수 없습니다. 병원에 문의해주세요.');
         break;
       } else {
-        alert('예약이 완료되었습니다.');
+        setOpenModal(true);
+
         setId(id + 1);
         const newList = {
           id: id,
@@ -34,70 +43,82 @@ const ReservationForm = ({ reservatedList, setReservatedList }) => {
           is_noshow: false,
         };
         setReservatedList([...reservatedList, newList]);
-        navigate('/reservationInquiry');
+
         break;
       }
     }
   };
 
+  const goToInquiry = () => {
+    navigate('/reservationInquiry');
+  };
+
+  const goToMain = () => {
+    navigate('/');
+  };
+
   return (
-    <Section>
-      <h1>예약자 정보</h1>
-      <div>
-        성함
-        <input
-          type='string'
-          className='name'
-          onChange={e => {
-            setName(e.target.value);
-          }}
-        ></input>
-      </div>
-      <div>
-        생년월일
-        <input
-          type='string'
-          className='birthday'
-          placeholder='6자리로 작성해주세요 ex)970425'
-          onChange={e => {
-            setBirth(e.target.value);
-          }}
-        ></input>
-      </div>
-      <div>
-        연락처
-        <input
-          type='number'
-          className='cellphone'
-          onChange={e => {
-            setContact(e.target.value);
-          }}
-        ></input>
-      </div>
-      <div>
-        예약 내용
-        <select
-          className='reason'
-          onChange={e => {
-            setReason(e.target.value);
+    <>
+      <Section>
+        <h1>예약자 정보</h1>
+        <div>
+          성함
+          <input
+            type='string'
+            className='name'
+            onChange={e => {
+              setName(e.target.value);
+            }}
+          ></input>
+        </div>
+        <div>
+          생년월일
+          <input
+            type='string'
+            className='birthday'
+            placeholder='6자리로 작성해주세요 ex)970425'
+            onChange={e => {
+              setBirth(e.target.value);
+            }}
+          ></input>
+        </div>
+        <div>
+          연락처
+          <input
+            type='number'
+            className='cellphone'
+            onChange={e => {
+              setContact(e.target.value);
+            }}
+          ></input>
+        </div>
+        <div>
+          예약 내용
+          <select
+            className='reason'
+            onChange={e => {
+              setReason(e.target.value);
+            }}
+          >
+            <option value='상담'>상담</option>
+            <option value='시술'>시술</option>
+          </select>
+        </div>
+
+        <div className='date'>
+          예약일시<span>{reservatedTime}</span>
+        </div>
+        <button
+          onClick={() => {
+            AddList();
           }}
         >
-          <option value='상담'>상담</option>
-          <option value='시술'>시술</option>
-        </select>
-      </div>
-
-      <div className='date'>
-        예약일시<span>{reservatedTime}</span>
-      </div>
-      <button
-        onClick={() => {
-          goToInquiry();
-        }}
-      >
-        예약하기
-      </button>
-    </Section>
+          예약하기
+        </button>
+      </Section>
+      {openModal ? <Modal data={reservatedList[reservatedList.length - 1]} setOpenModal={setOpenModal} goTo={goToInquiry} /> : null}
+      {openError ? <Error setOpenModal={setError} goTo={goToMain} message={error} /> : null}
+    </>
   );
 };
 

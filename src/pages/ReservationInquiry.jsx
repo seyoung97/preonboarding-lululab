@@ -1,47 +1,60 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import Modal from '../components/Modal/Modal';
+import Error from '../components/Modal/Erro';
 import { mainColor, layout } from '../theme';
 
 const ReservationInquiry = ({ reservatedList, setReservatedList }) => {
+  const navigate = useNavigate();
   const [inquiry, setInquiry] = useState('');
   const [isReservated, setIsReservated] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [errorOpen, setErrorOpen] = useState(false);
+  const [message, setMessage] = useState('');
+
   console.log(reservatedList);
 
   const handleInquiry = () => {
     for (let i = 0; i < reservatedList.length; i++) {
       if (reservatedList[i]['user_contact'] === inquiry) {
         setIsReservated(reservatedList[i]);
+        setOpen(true);
+
         break;
       } else {
         setIsReservated(null);
+        setErrorOpen(true);
+        setMessage('예약 내역이 없습니다.');
       }
     }
   };
 
-  // const handleInquiry = () => {
-  //   const result = reservatedList.filter(data => data['user_contact'] === inquiry);
-  //   setIsReservated(result);
-  // };
-
+  const goToInquiry = () => {
+    navigate('/reservationInquiry');
+  };
   console.log(typeof inquiry, inquiry);
   console.log(isReservated);
 
   return (
-    <Section>
-      <h1>예약 조회</h1>
-      <h2>예약시 등록한 연락처를 입력해주세요.</h2>
-      <div>
-        연락처
-        <input
-          type='string'
-          onChange={e => {
-            setInquiry(e.target.value);
-          }}
-        ></input>
-      </div>
-      <button onClick={handleInquiry}>조회하기</button>
-      {isReservated !== null ? <div>{isReservated['user_name']}</div> : <div>예약 내역이 없습니다.</div>}
-    </Section>
+    <>
+      <Section>
+        <h1>예약 조회</h1>
+        <h2>예약시 등록한 연락처를 입력해주세요.</h2>
+        <div>
+          연락처
+          <input
+            type='string'
+            onChange={e => {
+              setInquiry(e.target.value);
+            }}
+          ></input>
+        </div>
+        <button onClick={handleInquiry}>조회하기</button>
+      </Section>
+      {open !== false ? <Modal data={isReservated} setOpenModal={setOpen} /> : null}
+      {errorOpen !== false ? <Error setOpenModal={setErrorOpen} goTo={goToInquiry} message={message} /> : null}
+    </>
   );
 };
 
