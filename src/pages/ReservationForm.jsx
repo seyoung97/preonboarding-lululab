@@ -7,7 +7,7 @@ import Modal from '../components/Modal/Modal';
 import Error from '../components/Modal/Erro';
 import { mainColor, layout } from '../theme';
 
-const ReservationForm = ({ reservatedList, setReservatedList }) => {
+const ReservationForm = ({ reservatedList, setReservatedList, reservationList, setReservationList, limit }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const reservatedTime = location.search.slice(1, 13);
@@ -31,7 +31,6 @@ const ReservationForm = ({ reservatedList, setReservatedList }) => {
         break;
       } else {
         setOpenModal(true);
-
         setId(id + 1);
         const newList = {
           id: id,
@@ -43,7 +42,6 @@ const ReservationForm = ({ reservatedList, setReservatedList }) => {
           is_noshow: false,
         };
         setReservatedList([...reservatedList, newList]);
-
         break;
       }
     }

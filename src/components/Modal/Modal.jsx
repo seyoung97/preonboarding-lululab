@@ -6,7 +6,7 @@ const Modal = ({ data, setOpenModal, goTo }) => {
     <Section>
       <div className='overlay-style' />
       <div className='modal-style'>
-        <div>{data['user_name']}</div>
+        <div>{data['user_name']}님</div>
         <div>{data.date}</div>
         <div>예약되셨습니다.</div>
         <div>

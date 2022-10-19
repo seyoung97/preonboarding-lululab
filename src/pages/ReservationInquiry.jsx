@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Modal from '../components/Modal/Modal';
 import Error from '../components/Modal/Erro';
-import { mainColor, layout } from '../theme';
+import { mainColor } from '../theme';
 
-const ReservationInquiry = ({ reservatedList, setReservatedList }) => {
+const ReservationInquiry = ({ reservatedList }) => {
   const navigate = useNavigate();
   const [inquiry, setInquiry] = useState('');
   const [isReservated, setIsReservated] = useState(null);
@@ -20,7 +20,7 @@ const ReservationInquiry = ({ reservatedList, setReservatedList }) => {
       if (reservatedList[i]['user_contact'] === inquiry) {
         setIsReservated(reservatedList[i]);
         setOpen(true);
-
+        setErrorOpen(false);
         break;
       } else {
         setIsReservated(null);
