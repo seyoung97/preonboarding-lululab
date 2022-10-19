@@ -5,6 +5,7 @@ import Header from './components/Header/Header';
 import ReservationList from './pages/ReservaionList';
 import ReservationForm from './pages/ReservationForm';
 import ReservationInquiry from './pages/ReservationInquiry';
+import Modal from './components/Modal/Modal';
 
 function App() {
   const [reservatedList, setReservatedList] = useState([
@@ -36,6 +37,7 @@ function App() {
         <Route path='/' element={<ReservationList />} />
         <Route path='/reservationform/:id' element={<ReservationForm reservatedList={reservatedList} setReservatedList={setReservatedList} />} />
         <Route path='/reservationInquiry' element={<ReservationInquiry reservatedList={reservatedList} setReservatedList={setReservatedList} />} />
+        <Route path='/modal' element={<Modal />} />
       </Routes>
     </>
   );

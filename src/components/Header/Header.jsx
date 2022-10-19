@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import Logo from '../../assets/images/Header/lululab-logo.png';
 import { mainColor } from '../../theme';
 
@@ -6,8 +7,12 @@ const Header = () => {
   return (
     <Section>
       <img className='logo' src={Logo} alt='lululab logo'></img>
-      <div>병원 예약</div>
-      <div>예약 조회</div>
+      <Link to='/'>
+        <div>병원 예약</div>
+      </Link>
+      <Link to='/reservationInquiry'>
+        <div>예약 조회</div>
+      </Link>
     </Section>
   );
 };
