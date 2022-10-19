@@ -7,21 +7,21 @@ const ReservationInquiry = ({ reservatedList, setReservatedList }) => {
   const [isReservated, setIsReservated] = useState(null);
   console.log(reservatedList);
 
-  // const handleInquiry = () => {
-  //   for (let i = 0; i < reservatedList.length; i++) {
-  //     if (reservatedList[i]['user_contact'] === inquiry) {
-  //       setIsReservated(reservatedList[i]);
-  //     } else if (reservatedList[i]['user_contact'] !== inquiry) {
-  //       setIsReservated(null);
-  //     }
-  //     return isReservated;
-  //   }
-  // };
-
   const handleInquiry = () => {
-    const result = reservatedList.filter(data => data['user_contact'] === inquiry);
-    setIsReservated(result);
+    for (let i = 0; i < reservatedList.length; i++) {
+      if (reservatedList[i]['user_contact'] === inquiry) {
+        setIsReservated(reservatedList[i]);
+        break;
+      } else {
+        setIsReservated(null);
+      }
+    }
   };
+
+  // const handleInquiry = () => {
+  //   const result = reservatedList.filter(data => data['user_contact'] === inquiry);
+  //   setIsReservated(result);
+  // };
 
   console.log(typeof inquiry, inquiry);
   console.log(isReservated);
@@ -40,7 +40,7 @@ const ReservationInquiry = ({ reservatedList, setReservatedList }) => {
         ></input>
       </div>
       <button onClick={handleInquiry}>조회하기</button>
-      {isReservated === null ? <div>null</div> : <div>{isReservated[0]['user_name']}</div>}
+      {isReservated !== null ? <div>{isReservated['user_name']}</div> : <div>예약 내역이 없습니다.</div>}
     </Section>
   );
 };

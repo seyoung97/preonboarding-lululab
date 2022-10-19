@@ -18,7 +18,7 @@ const ReservationForm = ({ reservatedList, setReservatedList }) => {
 
   const goToInquiry = () => {
     for (let i = 0; i < blackList.length; i++) {
-      if (blackList[i]['user_contact'] === contact) {
+      if (blackList[i]['user_contact'] === contact && blackList[i]['user_name'] === name) {
         alert('귀하는 온라인으로 예약하실 수 없습니다. 병원에 문의해주세요.');
         break;
       } else {
