@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import BlackList from '../assets/data/blackList.json';
 import styled from 'styled-components';
 import { mainColor, layout } from '../theme';
 
@@ -12,25 +13,31 @@ const ReservationForm = ({ reservatedList, setReservatedList }) => {
   const [birth, setBirth] = useState('');
   const [contact, setContact] = useState('');
   const [reason, setReason] = useState('');
-
-  const addList = () => {
-    setId(id + 1);
-    const newList = {
-      id: id,
-      user_name: name,
-      user_birth: birth,
-      user_contact: contact,
-      reason: reason,
-      date: reservatedTime,
-      is_noshow: false,
-    };
-    setReservatedList([...reservatedList, newList]);
-  };
-  console.log(reservatedList);
+  const blackList = useMemo(() => BlackList, []);
+  console.log(blackList);
 
   const goToInquiry = () => {
-    alert('예약이 완료되었습니다.');
-    navigate('/reservationInquiry');
+    for (let i = 0; i < blackList.length; i++) {
+      if (blackList[i]['user_contact'] === contact) {
+        alert('귀하는 온라인으로 예약하실 수 없습니다. 병원에 문의해주세요.');
+        break;
+      } else {
+        alert('예약이 완료되었습니다.');
+        setId(id + 1);
+        const newList = {
+          id: id,
+          user_name: name,
+          user_birth: birth,
+          user_contact: contact,
+          reason: reason,
+          date: reservatedTime,
+          is_noshow: false,
+        };
+        setReservatedList([...reservatedList, newList]);
+        navigate('/reservationInquiry');
+        break;
+      }
+    }
   };
 
   return (
@@ -85,7 +92,6 @@ const ReservationForm = ({ reservatedList, setReservatedList }) => {
       </div>
       <button
         onClick={() => {
-          addList();
           goToInquiry();
         }}
       >
