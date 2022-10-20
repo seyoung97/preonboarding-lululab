@@ -1,19 +1,19 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
 import Modal from '../components/Modal/Modal';
 import Error from '../components/Modal/Erro';
 import { mainColor } from '../theme';
 
 const ReservationInquiry = ({ reservatedList }) => {
   const navigate = useNavigate();
+
   const [inquiry, setInquiry] = useState('');
   const [isReservated, setIsReservated] = useState(null);
   const [open, setOpen] = useState(false);
   const [errorOpen, setErrorOpen] = useState(false);
   const [message, setMessage] = useState('');
-
-  console.log(reservatedList);
 
   const handleInquiry = () => {
     for (let i = 0; i < reservatedList.length; i++) {
@@ -33,8 +33,6 @@ const ReservationInquiry = ({ reservatedList }) => {
   const goToInquiry = () => {
     navigate('/reservationInquiry');
   };
-  console.log(typeof inquiry, inquiry);
-  console.log(isReservated);
 
   return (
     <>

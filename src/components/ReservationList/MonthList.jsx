@@ -1,12 +1,11 @@
 import { useState, memo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { mainColor } from '../../theme';
-import { useNavigate } from 'react-router-dom';
 
 import Calendar from 'react-calendar';
 import SelectTime from './SelectTime';
-
 import 'react-calendar/dist/Calendar.css';
 
 const MonthList = ({ value, onChange, reservationTime, limit }) => {
@@ -18,7 +17,6 @@ const MonthList = ({ value, onChange, reservationTime, limit }) => {
     setSelectedMonth((value.getMonth() + 1).toString());
     setSelectedTime(reservationTime[e.target.id].time);
   };
-  console.log(selectedTime);
 
   const handleReservationClick = () => {
     if (selectedTime) {
