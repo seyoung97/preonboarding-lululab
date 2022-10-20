@@ -13,10 +13,13 @@
 
 <br/>
 
-# 배포 링크 https://extraordinary-elf-828716.netlify.app
+# 배포 링크 
+> https://extraordinary-elf-828716.netlify.app
 
 <br/>
+
 # 개발 언어
+
 > JavaScript
 
 # 기술 스택
@@ -41,7 +44,7 @@
 2. 리포지토리를 클론해주세요.
 
 ```
- git clone 
+ git clone https://github.com/seyoung97/preonboarding-lululab.git
 ```
 
 3. dependencies를 설치해주세요.
