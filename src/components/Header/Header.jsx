@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import Logo from '../../assets/images/Header/lululab-logo.png';
 import { mainColor } from '../../theme';
 

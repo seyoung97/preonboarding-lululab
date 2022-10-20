@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import MonthList from '../components/ReservationList/MonthList';
 
 const ReservationList = () => {
@@ -19,10 +18,6 @@ const ReservationList = () => {
       reservationTime.push(reservationList[limit][i]);
     }
   }
-
-  console.log(reservationTime);
-  console.log(reservationList);
-  console.log(typeof limit, limit);
 
   return (
     <section>

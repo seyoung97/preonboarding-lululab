@@ -5,12 +5,13 @@ import styled from 'styled-components';
 import BlackList from '../assets/data/blackList.json';
 import Modal from '../components/Modal/Modal';
 import Error from '../components/Modal/Erro';
-import { mainColor, layout } from '../theme';
+import { mainColor } from '../theme';
 
-const ReservationForm = ({ reservatedList, setReservatedList, reservationList, setReservationList, limit }) => {
+const ReservationForm = ({ reservatedList, setReservatedList }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const reservatedTime = location.search.slice(1, 13);
+
   const [id, setId] = useState(0);
   const [name, setName] = useState('');
   const [birth, setBirth] = useState('');
@@ -21,7 +22,6 @@ const ReservationForm = ({ reservatedList, setReservatedList, reservationList, s
   const [error, setError] = useState('');
 
   const blackList = useMemo(() => BlackList, []);
-  console.log(blackList);
 
   const AddList = () => {
     for (let i = 0; i < blackList.length; i++) {
@@ -121,7 +121,6 @@ const ReservationForm = ({ reservatedList, setReservatedList, reservationList, s
 };
 
 const Section = styled.section`
-  /* border: ${layout}; */
   width: 450px;
   margin: auto;
   margin-top: 100px;

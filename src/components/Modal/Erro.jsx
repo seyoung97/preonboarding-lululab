@@ -51,7 +51,7 @@ const Section = styled.section`
       font-size: 19px;
     }
     .close-modal {
-      margin-top: 35px;
+      margin-top: 50px;
       padding: 5px 20px;
       border: none;
       border-radius: 5px;
